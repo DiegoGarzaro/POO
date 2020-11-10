@@ -23,8 +23,18 @@
 #define COL 3
 
 // Enums
-enum status_game {JOGANDO, A_GANHOU, B_GANHOU, EMPATE} status;
-enum turn_game {A_JOGANDO = 1, B_JOGANDO} turn;
+enum status_game
+{
+    JOGANDO,
+    A_GANHOU,
+    B_GANHOU,
+    EMPATE
+} status;
+enum turn_game
+{
+    A_JOGANDO = 1,
+    B_JOGANDO
+} turn;
 
 // Funcoes
 char **cria_tabuleiro();
@@ -34,45 +44,57 @@ bool verifica_jogada(char **table, int row, char col);
 void insere_jogada(char **table, int row, char col);
 int verifica_resultado(char **table);
 
-int main(){
+int main()
+{
     char **table = cria_tabuleiro();
     status = JOGANDO;
     turn = A_JOGANDO;
     bool isValid = false;
     int row;
     char col;
-    
+
+    // Instructions
     instrucoes();
     getchar();
     setbuf(stdin, NULL);
-    while(status == JOGANDO){
-        // Recebe entrada
-        do{
+    while (status == JOGANDO)
+    {
+        // Receive input by user
+        do
+        {
             row = 0;
             col = 0;
             printf("Posicao jogador %d: ", turn);
             scanf("%d%c", &row, &col);
             setbuf(stdin, NULL);
-            // Verifica entrada
+            // Validate the input
             isValid = verifica_jogada(table, row, col);
-            if (isValid == false){
+            if (isValid == false)
+            {
                 imprime_tabuleiro(table);
                 printf("Entrada invalida!! Por favor, digite uma posicao disponivel no tabuleiro\n");
             }
-        } while(isValid == false);
+        } while (isValid == false);
         isValid = false;
-        // Insere jogada
+        // Insert the move
         insere_jogada(table, row, col);
-        // Imprime tabuleiro
+        // Print the board
         imprime_tabuleiro(table);
-        // Verifica vencedor
+        // Verify the game if there's a winner or draw
         status = verifica_resultado(table);
     }
+    // Free the memory
     free(table);
     return 0;
 }
 
-void insere_jogada(char **table, int row, char col){
+/**
+ * Function:   Insert the 'X' (for player 1) or 'O' (for player 2) character in the choosen position by user
+ * Parameters: double-pointer char (board), char column
+ * Return:     void
+ * */
+void insere_jogada(char **table, int row, char col)
+{
     switch (toupper(col))
     {
     case 'A':
@@ -88,26 +110,37 @@ void insere_jogada(char **table, int row, char col){
         break;
     }
 
-    if(turn == A_JOGANDO){
-        table[row-1][col] = 'X';
+    if (turn == A_JOGANDO)
+    {
+        table[row - 1][col] = 'X';
         turn = B_JOGANDO;
     }
-    else{
-        table[row-1][col] = 'O';
+    else
+    {
+        table[row - 1][col] = 'O';
         turn = A_JOGANDO;
     }
-
 }
 
-bool verifica_jogada(char **table, int row, char col){
+/**
+ * Function:   Validate the user input
+ * Parameters: double-pointer char (board), char column
+ * Return:     bool (true -> valid | false -> invalid)
+ * */
+bool verifica_jogada(char **table, int row, char col)
+{
     bool valid = true;
 
-    if(row >= 1 && row <= 3);
-    else{
+    if (row >= 1 && row <= 3)
+        ;
+    else
+    {
         valid = false;
     }
-    if(toupper(col) == 'A' || toupper(col) == 'B' || toupper(col) == 'C');
-    else{
+    if (toupper(col) == 'A' || toupper(col) == 'B' || toupper(col) == 'C')
+        ;
+    else
+    {
         valid = false;
     }
 
@@ -126,8 +159,10 @@ bool verifica_jogada(char **table, int row, char col){
         break;
     }
 
-    if(valid == true){
-        if(table[row-1][col] != ' '){
+    if (valid == true)
+    {
+        if (table[row - 1][col] != ' ')
+        {
             valid = false;
         }
     }
@@ -135,83 +170,109 @@ bool verifica_jogada(char **table, int row, char col){
     return valid;
 }
 
-
-int verifica_resultado(char **table){
-    // Code
+/**
+ * Function:   Verify if one of the conditions of endgame was corresponded
+ * Parameters: double-pointer char (board)
+ * Return:     integer (status)
+ * */
+int verifica_resultado(char **table)
+{
     int result = JOGANDO;
     char vencedor = 0;
     int count_blank = 0;
     int i, j;
 
-    // Verificacao horizontal
-    for(i = 0; i < ROW; i++){
-        if(table[i][0] == table[i][1] && table[i][0] == table[i][2] && table[i][0] != ' '){
+    // Horizontal check
+    for (i = 0; i < ROW; i++)
+    {
+        if (table[i][0] == table[i][1] && table[i][0] == table[i][2] && table[i][0] != ' ')
+        {
             vencedor = table[i][0];
             i = ROW;
         }
     }
 
-    // Verificacao vertical
-    for(j = 0; j < COL; j++){
-        if(table[0][j] == table[1][j] && table[0][j] == table[2][j] && table[0][j] != ' '){
+    // Vertical check
+    for (j = 0; j < COL; j++)
+    {
+        if (table[0][j] == table[1][j] && table[0][j] == table[2][j] && table[0][j] != ' ')
+        {
             vencedor = table[0][j];
             j = COL;
         }
     }
 
-    // Verificacao diagonal principal
-    if(table[0][0] == table[1][1] && table[0][0] == table[2][2] && table[0][0] != ' '){
+    // Main diagonal check
+    if (table[0][0] == table[1][1] && table[0][0] == table[2][2] && table[0][0] != ' ')
+    {
         vencedor = table[0][0];
     }
 
-    // Verificacao diagonal secundaria
-    if(table[2][0] == table[1][1] && table[2][0] == table[0][2] && table[2][0] != ' '){
+    // Secondary diagonal check
+    if (table[2][0] == table[1][1] && table[2][0] == table[0][2] && table[2][0] != ' ')
+    {
         vencedor = table[2][0];
     }
 
-    // Verifica se todas as posicoes estao ocupadas
-    for(i = 0; i < ROW; i++){
-        for(j = 0; j < COL; j++){
-            if (table[i][j] == ' '){
+    // Verify if all the cells are filled
+    for (i = 0; i < ROW; i++)
+    {
+        for (j = 0; j < COL; j++)
+        {
+            if (table[i][j] == ' ')
+            {
                 count_blank++;
             }
         }
     }
-
-    if(count_blank == 0){
+    // Count blank cells
+    if (count_blank == 0)
+    {
         if (vencedor == 0)
             vencedor = EMPATE;
     }
-
-    if(vencedor != 0){
-        if(vencedor == 'X'){
+    // Analyze the result if one of the conditions of endgame was corresponded
+    if (vencedor != 0)
+    {
+        if (vencedor == 'X')
+        {
             result = A_GANHOU;
             printf("\nJogador %d foi o vencedor do jogo!\n", result);
         }
-        else if(vencedor == 'O'){
+        else if (vencedor == 'O')
+        {
             result = B_GANHOU;
             printf("\nJogador %d foi o vencedor do jogo!\n", result);
         }
-        else{
+        else
+        {
             result = EMPATE;
             printf("\nEMPATE!! Nao houve vencedores no jogo!\n");
         }
-        
     }
 
     return result;
 }
 
-char **cria_tabuleiro(){
-    char **table = (char**) malloc (ROW * sizeof(char*));
+/**
+ * Function:  Create the board
+ * Parameter: void
+ * Return:    double-pointer char (board)
+ * */
+char **cria_tabuleiro()
+{
+    char **table = (char **)malloc(ROW * sizeof(char *));
     int i, j;
 
-    for(i = 0; i < ROW; i++){
-        table[i] = (char *) malloc (COL * sizeof(char *));
+    for (i = 0; i < ROW; i++)
+    {
+        table[i] = (char *)malloc(COL * sizeof(char *));
     }
 
-    for(i = 0; i < ROW; i++){
-        for(j = 0; j < COL; j++){
+    for (i = 0; i < ROW; i++)
+    {
+        for (j = 0; j < COL; j++)
+        {
             table[i][j] = ' ';
         }
     }
@@ -219,22 +280,37 @@ char **cria_tabuleiro(){
     return table;
 }
 
-void imprime_tabuleiro(char **table){
+/**
+ * Function:   Responsable to print the board on the screen
+ * Parameters: double-pointer char (board)
+ * Return:     void
+ * */
+void imprime_tabuleiro(char **table)
+{
     int i, j;
     printf("\nJOGO DA VELHA\n");
-    
-    for(i = 0; i < ROW; i++){
+
+    for (i = 0; i < ROW; i++)
+    {
         printf("\n|---|---|---|\n|");
-        for(j = 0; j < COL; j++){
+        for (j = 0; j < COL; j++)
+        {
             printf(" %c |", table[i][j]);
         }
     }
     printf("\n|---|---|---|\n\n");
 }
 
-void instrucoes(void){
+/**
+ * Function:   Print on the screen the game instructions
+ * Parameters: void
+ * Return:     void
+ * */
+void instrucoes(void)
+{
     printf("\n      JOGO DA VELHA\n\n\tINTRUCOES\n\n");
     printf("Para selecionar a posicao de cada peca, digite a linha (1, 2, 3) e a coluna (A, B, C) sem espacos, por exemplo:\n");
+    printf("\nJogador 1 -> X\nJogador 2 -> O\n\n");
     printf("Posicao jogador 1: 1B\n");
     printf("Posicao jogador 2: 3C\n");
     printf("|---|---|---|\n");

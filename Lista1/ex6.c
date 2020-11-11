@@ -296,12 +296,14 @@ void imprime_tabuleiro(char **table)
 
     for (i = 0; i < ROW; i++)
     {
-        if(i == 0){
+        if (i == 0)
+        {
             printf("\n   A   B   C");
-            printf("\n |---|---|---|\n%d|", i+1);
+            printf("\n |---|---|---|\n%d|", i + 1);
         }
-        else{
-            printf("\n |---|---|---|\n%d|", i+1);
+        else
+        {
+            printf("\n |---|---|---|\n%d|", i + 1);
         }
         for (j = 0; j < COL; j++)
         {

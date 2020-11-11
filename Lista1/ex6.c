@@ -44,6 +44,7 @@ bool verifica_jogada(char **table, int row, char col);
 void insere_jogada(char **table, int row, char col);
 int verifica_resultado(char **table);
 
+// Main function
 int main()
 {
     char **table = cria_tabuleiro();
@@ -57,6 +58,8 @@ int main()
     instrucoes();
     getchar();
     setbuf(stdin, NULL);
+
+    // Start the game
     while (status == JOGANDO)
     {
         // Receive input by user
@@ -83,7 +86,8 @@ int main()
         // Verify the game if there's a winner or draw
         status = verifica_resultado(table);
     }
-    // Free the memory
+
+    // End game. Free the memory
     free(table);
     return 0;
 }
@@ -255,9 +259,9 @@ int verifica_resultado(char **table)
 }
 
 /**
- * Function:  Create the board
- * Parameter: void
- * Return:    double-pointer char (board)
+ * Function:   Create the board
+ * Parameters: void
+ * Return:     double-pointer char (board)
  * */
 char **cria_tabuleiro()
 {
@@ -292,13 +296,19 @@ void imprime_tabuleiro(char **table)
 
     for (i = 0; i < ROW; i++)
     {
-        printf("\n|---|---|---|\n|");
+        if(i == 0){
+            printf("\n   A   B   C");
+            printf("\n |---|---|---|\n%d|", i+1);
+        }
+        else{
+            printf("\n |---|---|---|\n%d|", i+1);
+        }
         for (j = 0; j < COL; j++)
         {
             printf(" %c |", table[i][j]);
         }
     }
-    printf("\n|---|---|---|\n\n");
+    printf("\n |---|---|---|\n\n");
 }
 
 /**
@@ -309,16 +319,26 @@ void imprime_tabuleiro(char **table)
 void instrucoes(void)
 {
     printf("\n      JOGO DA VELHA\n\n\tINTRUCOES\n\n");
-    printf("Para selecionar a posicao de cada peca, digite a linha (1, 2, 3) e a coluna (A, B, C) sem espacos, por exemplo:\n");
-    printf("\nJogador 1 -> X\nJogador 2 -> O\n\n");
+    printf("Para selecionar a posicao de cada peca, digite a linha (1, 2, 3) e a coluna (A, B, C) sem espacos.\n");
+    printf("\nComo pode ser visto abaixo o tabuleiro de posicoes disponiveis de entrada do usuario:\n");
+    printf("|----|----|----|\n");
+    printf("| 1A | 2B | 3C |\n");
+    printf("|----|----|----|\n");
+    printf("| 2A | 2B | 2C |\n");
+    printf("|----|----|----|\n");
+    printf("| 3A | 3B | 3C |\n");
+    printf("|----|----|----|\n");
+    printf("\nJogador 1 -> X\nJogador 2 -> O\n\nExemplo:\n\n");
     printf("Posicao jogador 1: 1B\n");
-    printf("Posicao jogador 2: 3C\n");
-    printf("|---|---|---|\n");
-    printf("|   | X |   |\n");
-    printf("|---|---|---|\n");
-    printf("|   |   |   |\n");
-    printf("|---|---|---|\n");
-    printf("|   |   | O |\n");
-    printf("|---|---|---|\n");
+    printf("Posicao jogador 2: 3C\n\n");
+    printf("   A   B   C  \n");
+    printf(" |---|---|---|\n");
+    printf("1|   | X |   |\n");
+    printf(" |---|---|---|\n");
+    printf("2|   |   |   |\n");
+    printf(" |---|---|---|\n");
+    printf("3|   |   | O |\n");
+    printf(" |---|---|---|\n");
+
     printf("\nPressione Enter para continuar e iniciar o jogo!\n");
 }

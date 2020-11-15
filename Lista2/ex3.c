@@ -72,6 +72,35 @@ rational_number *recebe_entrada(){
     return num;
 }
 
+rational_number soma_fracao(rational_number fr1, rational_number fr2){
+    // code
+    rational_number num;
+    num.numerador = (fr1.numerador * fr2.denominador) + (fr2.numerador * fr1.denominador);
+    num.denominador = (fr1.denominador * fr2.denominador);
+    return num;
+}
+
+rational_number subtrai_fracao(rational_number fr1, rational_number fr2){
+    // code
+    rational_number num;
+    num.numerador = (fr1.numerador * fr2.denominador) - (fr2.numerador * fr1.denominador);
+    num.denominador = (fr1.denominador * fr2.denominador);
+    return num;
+}
+
+rational_number multiplica_fracao(rational_number fr1, rational_number fr2){
+    // code
+    rational_number num;
+    num.numerador = (fr1.numerador * fr2.numerador);
+    num.denominador = (fr1.denominador * fr2.denominador);
+    return num;
+}
+
+rational_number divide_fracao(rational_number fr1, rational_number fr2){
+    // code
+    rational_number num;
+}
+
 rational_number simplifica_fracao(rational_number fr){
     // code
     rational_number simp_num;

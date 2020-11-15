@@ -320,7 +320,7 @@ void imprime_tabuleiro(char **table)
  * */
 void instrucoes(void)
 {
-    printf("\n      JOGO DA VELHA\n\n\tINTRUCOES\n\n");
+    printf("\n      JOGO DA VELHA\n\n\tINSTRUCOES\n\n");
     printf("Para selecionar a posicao de cada peca, digite a linha (1, 2, 3) e a coluna (A, B, C) sem espacos.\n");
     printf("\nComo pode ser visto abaixo o tabuleiro de posicoes disponiveis de entrada do usuario:\n");
     printf("|----|----|----|\n");

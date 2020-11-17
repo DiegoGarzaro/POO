@@ -175,5 +175,5 @@ void imprime_fracao(rational_number fr)
 
 void imprime_float(rational_number fr)
 {
-    printf("%.2lf", ((double)fr.numerador / (double)fr.denominador));
+    printf("%.3lf", ((double)fr.numerador / (double)fr.denominador));
 }

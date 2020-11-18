@@ -113,7 +113,15 @@ rational_number divide_fracao(rational_number fr1, rational_number fr2)
 rational_number simplifica_fracao(rational_number fr)
 {
     rational_number simp_num;
-    int mdc = max_div_comum(fr.numerador, fr.denominador, fr.denominador);
+    int mdc;
+    if (fr.numerador == 0 || fr.denominador == 0)
+    {
+        mdc = 1;
+    }
+    else
+    {
+        mdc = max_div_comum(fr.numerador, fr.denominador, fr.denominador);
+    }
     //printf("\nMDC: %d\n", mdc);
     simp_num.numerador = fr.numerador / mdc;
     simp_num.denominador = fr.denominador / mdc;

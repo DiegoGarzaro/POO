@@ -130,10 +130,6 @@ rational_number simplifica_fracao(rational_number fr)
 
 int max_div_comum(int numerador, int denominador, int num)
 {
-    if (numerador == 0 || denominador == 0)
-    {
-        return 1;
-    }
     if ((numerador % num != 0) || (denominador % num != 0))
     {
         return max_div_comum(numerador, denominador, num - 1);

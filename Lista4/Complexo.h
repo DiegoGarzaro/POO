@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stdlib.h>
+#include <math.h>
 using namespace std;
 
 typedef struct Complex_Number{
@@ -11,7 +13,7 @@ class ComplexCalculator{
         Complex_Number *c_num;
         ComplexCalculator();
     public:
-        ComplexCalculator(float i1, float j1, float i2, float j2);
+        ComplexCalculator(char num[2][100]);
         ~ComplexCalculator();
         Complex_Number soma_complexo();
         Complex_Number subtrai_complexo();

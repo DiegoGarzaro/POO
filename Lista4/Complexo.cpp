@@ -1,7 +1,7 @@
 #include "Complexo.h"
 
 ComplexCalculator::ComplexCalculator(char num[2][100]){
-    c_num = (Complex_Number*) malloc (2 * sizeof(Complex_Number*));
+    c_num = new Complex_Number[2];
     int i, j, k;
     int isImag = 0;
     char real[2][30], imag[2][30];
@@ -33,7 +33,7 @@ ComplexCalculator::ComplexCalculator(char num[2][100]){
                 }
             }
         }
-        cout << endl << i+1 << "o Numero\nReal: " << atof(real[i]) << "\nImaginario: " << atof(imag[i]) << endl;
+        //cout << endl << i+1 << "o Numero\nReal: " << atof(real[i]) << "\nImaginario: " << atof(imag[i]) << endl;
         isImag = 0;
     }
     c_num[0].x = atof(real[0]);
@@ -51,8 +51,8 @@ ComplexCalculator::ComplexCalculator(){
 }
 
 ComplexCalculator::~ComplexCalculator(){
-    free(c_num);
-    cout << "Destrutor: Memoria utilizada na classe para armazenar os numeros complexos foi liberada" << endl;
+    delete[] c_num;
+    cout << endl << "Destrutor: Memoria utilizada na classe para armazenar os numeros complexos foi liberada." << endl;
 }
 
 Complex_Number ComplexCalculator::soma_complexo(){
@@ -79,15 +79,18 @@ Complex_Number ComplexCalculator::multiplica_complexo(){
 Complex_Number ComplexCalculator::divide_complexo(){
     Complex_Number result, conjugado;
     conjugado.x = c_num[1].x;
-    conjugado.y = -c_num[1].y;
-    if(((c_num[1].x * conjugado.x) - (c_num[1].y * conjugado.y)) != 0 && ((c_num[1].x * conjugado.y) + (c_num[1].y * conjugado.x)) != 0){
-        result.x = ((c_num[0].x * conjugado.x) - (c_num[0].y * conjugado.y)) / ((c_num[1].x * conjugado.x) - (c_num[1].y * conjugado.y));
-        result.y = ((c_num[0].x * conjugado.y) + (c_num[0].y * conjugado.x)) / ((c_num[1].x * conjugado.y) + (c_num[1].y * conjugado.x));
-    }
-    else{
-        cout << "Nao e possivel fazer divisao por 0" << endl;
+    conjugado.y = c_num[1].y * (-1);
+    float num_real = (c_num[0].x * conjugado.x) - (c_num[0].y * conjugado.y);
+    float num_imag = (c_num[0].x * conjugado.y) + (c_num[0].y * conjugado.x);
+    float den = pow(c_num[1].x,2) + pow(c_num[1].y,2);
+    if(den == 0){
+        cout << "Nao e possivel fazer divisao por 0." << endl;
         result.x = 0;
         result.y = 0;
+    }
+    else{
+        result.x = num_real / den;
+        result.y = num_imag / den;
     }
     return result;
 }
@@ -98,10 +101,15 @@ void ComplexCalculator::imprime_retangular(Complex_Number num){
 
 void ComplexCalculator::imprime_polar(Complex_Number num){
     if(num.y == 0){
-        cout << "Nao e possivel fazer divisao por 0" << endl;
+        cout << "Nao e possivel fazer divisao por 0." << endl;
         return;
     }
     double z = sqrt(pow(num.x,2) + pow(num.y,2));
     float theta = atan(num.y/num.x) * (180.0 / 3.14159);
-    cout << z << " |" << theta << " graus" << endl;
+    if(num.x > 0)
+        cout << z << " |" << theta << " graus" << endl;
+    else if(num.x < 0)
+        cout << z << " |" << 180+theta << " graus" << endl;
+    //else if(num.x > 0 && num.y < 0)
+        //cout << z << " |" << 360+theta << " graus" << endl;
 }

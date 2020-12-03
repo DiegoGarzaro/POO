@@ -43,33 +43,26 @@ int main(){
 
     ComplexCalculator calculo1(num);
 
+    cout << endl << "Soma dos numeros complexos" << endl << "Forma Retangular:" << endl;
     calculo1.imprime_retangular(calculo1.soma_complexo());
+    cout << "Forma Polar:" << endl;
     calculo1.imprime_polar(calculo1.soma_complexo());
 
+    cout << endl << "Subtracao dos numeros complexos" << endl << "Forma Retangular:" << endl;
+    calculo1.imprime_retangular(calculo1.subtrai_complexo());
+    cout << "Forma Polar:" << endl;
+    calculo1.imprime_polar(calculo1.subtrai_complexo());
 
-/*
-    for(i = 0; i < 2; i++){
-        for(j = 0, k = 0; num[i][j] != '\0'; j++){
-            if((num[i][j] == '+' || num[i][j] == '-') && j != 0){
-                isImag = 1;
-                k=0;
-            }
-            if(isImag == 0){
-                real[i][k] = num[i][j];
-                k++;
-            }
-            else{
-                if(num[i][j] != 'i' && num[i][j] != 'j')
-                {
-                    imag[i][k] = num[i][j];
-                    k++;
-                }
-            }
-        }
-        cout << endl << i+1 << "o Numero\nReal: " << atof(real[i]) << "\nImaginario: " << atof(imag[i]) << endl;
-        isImag = 0;
-    }
-    */
+    cout << endl << "Multiplicacao dos numeros complexos" << endl << "Forma Retangular:" << endl;
+    calculo1.imprime_retangular(calculo1.multiplica_complexo());
+    cout << "Forma Polar:" << endl;
+    calculo1.imprime_polar(calculo1.multiplica_complexo());
+
+    cout << endl << "Divisao dos numeros complexos" << endl << "Forma Retangular:" << endl;
+    calculo1.imprime_retangular(calculo1.divide_complexo());
+    cout << "Forma Polar:" << endl;
+    calculo1.imprime_polar(calculo1.divide_complexo());
+
 
     return 0;
 }

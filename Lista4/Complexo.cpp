@@ -21,17 +21,11 @@ ComplexCalculator::ComplexCalculator(char num[2][100]){
                 isImag = 1;
                 k=0;
             }
-            if(num[i][j] == 'j')
-                isImag = 1;
             if(isImag == 0){
                 real[i][k] = num[i][j];
                 k++;
             }
             else{
-                if(j == 1){
-                        imag[i][k] = num[i][0];
-                        k++;
-                }
                 if(num[i][j] != 'i' && num[i][j] != 'j')
                 {
                     imag[i][k] = num[i][j];

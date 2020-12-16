@@ -29,7 +29,7 @@ public:
     void putdata();
 };
 
-class CarroPasseio: public Motor, public Veiculo
+class CarroPasseio: private Motor, Veiculo
 {
 private:
     std::string Cor;
@@ -42,7 +42,7 @@ public:
     void putdata();
 };
 
-class Caminhao: private Motor, private Veiculo
+class Caminhao: private Motor, Veiculo
 {
 private:
     int Toneladas;

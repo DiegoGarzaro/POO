@@ -1,3 +1,20 @@
+/**
+ * POO -> Lista 6 - Exercicio 1
+ * Author: Diego R. Garzaro
+ * GRR20172364
+ * 
+ * 1) Crie uma classe Empresa capaz de armazenar os dados de uma empresa (nome,
+ * endereço, cidade, estado, CEP e telefone). Inclua um construtor sem argumentos e um que
+ * receba os dados como argumentos e os inicialize. Escreva duas funções, uma para fazer a
+ * interface com o usuário da entrada de dados, getdata(), e outra para imprimir os dados,
+ * putdata().
+ * Use a classe Empresa como base para criar a classe Restaurante. Inclua o tipo de comida,
+ * o preço médio de um prato, duas funções construtoras, a interface de entrada de dados,
+ * getdata(), e a função que imprima os dados, putdata(). Construa um programa para
+ * testar a classe Restaurante.
+ * 
+ * */
+
 #include "Classe.h"
 
 int main(){

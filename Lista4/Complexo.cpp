@@ -100,7 +100,7 @@ void ComplexCalculator::imprime_retangular(Complex_Number num){
 }
 
 void ComplexCalculator::imprime_polar(Complex_Number num){
-    if(num.y == 0){
+    if(num.x == 0){
         cout << "Nao e possivel fazer divisao por 0." << endl;
         return;
     }

@@ -49,14 +49,6 @@ keys Input::Listen()
                     //std::cout << "arrow Down key pressed.\n";
                     this->pressed_key = KEY_DOWN;
                     break;
-                case 86: // if any arrow key was pressed break here
-                    //std::cout << "V key pressed.\n";
-                    this->pressed_key = KEY_V;
-                    break;
-                case 70: // if any arrow key was pressed break here
-                    //std::cout << "arrow Down key pressed.\n";
-                    this->pressed_key = KEY_F;
-                    break;
                 case VK_ESCAPE: // if escape key was pressed end program loop
                     //std::cout << "escape key pressed.\n";
                     this->pressed_key = KEY_ESC;

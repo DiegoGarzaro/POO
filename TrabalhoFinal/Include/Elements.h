@@ -68,7 +68,7 @@ private:
 public:
     Snake(int x, int y);
     ~Snake();
-    void add_segment();                 // Increase the size of the body
+    void operator++();                  // Increase the size of the body
     void update_position(int x, int y); // Update the segments position
     void move(direction dir);           // Release a movement
     int verify_colision();              // Verify if the snake colided with itself or with the wall
@@ -82,6 +82,7 @@ class Feed
 private:
     Position feed;
     Position limit;
+    int num_feeds;
 public:
     Feed(int x, int y);
     ~Feed();

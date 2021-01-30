@@ -55,7 +55,7 @@ Board::~Board()
 
 void Board::init_board()
 {
-    cout << "\033[H\033[2J"; // Clear screen
+    //cout << "\033[H\033[2J"; // Clear screen
     system("cls");
     int i, j;
     for (i = 0; i < this->limit.x; i++)
@@ -141,6 +141,7 @@ Snake::Snake(int x, int y)
     body.push_back(s1);
     s1.y++;
     body.push_back(s1);
+    this->cont = 0;
 }
 
 Snake::~Snake()
@@ -150,7 +151,7 @@ Snake::~Snake()
     this->cont = 0;
 }
 
-void Snake::add_segment()
+void Snake::operator++()
 {
     cont++;
 }
@@ -237,6 +238,7 @@ Feed::Feed(int x, int y)
     srand(time(NULL));
     feed.x = (rand() % (this->limit.x - TAM_BORDER)) + 1;
     feed.y = (rand() % (this->limit.y - TAM_BORDER)) + 1;
+    this->num_feeds = 0;
 }
 
 Feed::~Feed()
@@ -253,6 +255,7 @@ void Feed::new_feed(vector<Position> snake)
         nfeed.x = (rand() % (this->limit.x - TAM_BORDER)) + 1;
         nfeed.y = (rand() % (this->limit.y - TAM_BORDER)) + 1;
     } while (this->valida_feed(nfeed, snake) == FALSE);
+    this->num_feeds++;
     this->feed = nfeed;
 }
 

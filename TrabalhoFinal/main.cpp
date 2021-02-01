@@ -8,7 +8,6 @@ int main(){
     do{
         option = ui1.call_menu();
         ui1.handle_menu(option);
-        option = 1;
         ui1.play_game();
         ui1.classificar();
     } while(option > 0);

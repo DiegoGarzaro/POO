@@ -11,7 +11,7 @@ int main(){
         option = 1;
         ui1.play_game();
         ui1.classificar();
-    } while(option == TRUE);
+    } while(option > 0);
 
 
     return 0;

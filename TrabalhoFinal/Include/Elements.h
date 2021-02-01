@@ -6,9 +6,6 @@
 #include <time.h>
 using namespace std;
 
-// Defines
-#define TAM_LIN 15
-#define TAM_COL 30
 #define TAM_BORDER 2
 
 // Enums
@@ -26,21 +23,6 @@ typedef struct Struct_Position
     int x;
     int y;
 } Position;
-
-// Class Limits
-class Limits
-{
-private:
-    int sizeX;
-    int sizeY;
-public:
-    Limits();
-    ~Limits();
-    void set_sizeX(int x);
-    void set_sizeY(int y);
-    int get_sizeX();
-    int get_sizeY();
-};
 
 // Class Board -> Tabuleiro
 class Board
@@ -68,6 +50,7 @@ private:
 public:
     Snake(int x, int y);
     ~Snake();
+    void new_game();
     void operator++();                  // Increase the size of the body
     void update_position(int x, int y); // Update the segments position
     void move(direction dir);           // Release a movement

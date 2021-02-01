@@ -1,12 +1,13 @@
 #include "../Include/Game.h"
 
-Game::Game(Position board_size, int dificulty) : Input(), Board(board_size.x, board_size.y),
-                                                 Snake(board_size.x, board_size.y), Feed(board_size.x, board_size.y)
+Game::Game() : Board(LIMIT_X, LIMIT_Y),
+               Snake(LIMIT_X, LIMIT_Y), Feed(LIMIT_X, LIMIT_Y)
 {
     this->status = 0;
     this->score = 0;
-    this->dificulty = dificulty;
-    this->board_size = board_size;
+    this->dificulty = 0;
+    this->board_size.x = LIMIT_X;
+    this->board_size.y = LIMIT_Y;
     this->update_game = 0;
     this->time = clock() + velocity[this->dificulty];
 }
@@ -18,48 +19,77 @@ Game::~Game()
     this->dificulty = 0;
     this->update_game = 0;
     this->time = 0;
+    this->menu = 0;
+}
+
+int Game::get_dificulty(){
+    return this->dificulty;
+}
+
+int Game::get_score(){
+    return this->score;
+}
+
+void Game::set_dificulty(int d){
+    this->dificulty = d;
 }
 
 void Game::run_game()
 {
     int is_position_changed = 0;
+    int delay;
     Input i1;
-    keys key = KEY_NONE, last_key = KEY_NONE, aux_key = KEY_NONE;
+    keys key = KEY_NONE, last_key = KEY_NONE, atual_key = KEY_NONE;
     Board b1(this->board_size.x, this->board_size.y);
     Snake s1(this->board_size.x, this->board_size.y);
     Feed f1(this->board_size.x, this->board_size.y);
     // ADD DIRECTION
+    s1.new_game();
+    this->status = 0;
+    this->score = 0;
     vector<Position> sn = s1.get_snake();
     b1.update_board(sn, f1.get_feed_position());
+    if (this->dificulty == 4)
+    {
+        delay = 3;
+    }
+    else{
+        delay = this->dificulty;
+    }
     while (this->status == 0)
     {
-        aux_key = key;
-        if(is_position_changed == FALSE){
+        if (key != KEY_NONE)
+        {
+            atual_key = key;
+        }
+        if (is_position_changed == FALSE)
+        {
             key = i1.Listen();
         }
-        if (aux_key != key)
+        if (atual_key != key && key != KEY_NONE)
         {
             is_position_changed = TRUE;
-            if ((aux_key == KEY_RIGHT || aux_key == KEY_LEFT) && (key == KEY_LEFT || key == KEY_RIGHT))
+            if ((atual_key == KEY_RIGHT || atual_key == KEY_LEFT) && (key == KEY_LEFT || key == KEY_RIGHT))
             {
-                key = aux_key;
+                key = atual_key;
             }
-            else if ((aux_key == KEY_UP || aux_key == KEY_DOWN) && (key == KEY_DOWN || key == KEY_UP))
+            else if ((atual_key == KEY_UP || atual_key == KEY_DOWN) && (key == KEY_DOWN || key == KEY_UP))
             {
-                key = aux_key;
+                key = atual_key;
             }
             else
             {
-                last_key = aux_key;
+                last_key = atual_key;
+                atual_key = key;
             }
         }
-        if (key == KEY_ESC)
+        if (atual_key == KEY_ESC)
         {
             this->status = 1;
         }
-        if (key > KEY_NONE && key < KEY_ESC && this->update_game == TRUE)
+        if (atual_key > KEY_NONE && atual_key < KEY_ESC && this->update_game == TRUE)
         {
-            direction direction = this->key_to_move(last_key, key);
+            direction direction = this->key_to_move(last_key, atual_key);
             s1.move(direction);
             sn = s1.get_snake();
             if (sn[0].x == f1.get_feed_position().x && sn[0].y == f1.get_feed_position().y)
@@ -67,6 +97,25 @@ void Game::run_game()
                 f1.new_feed(sn);
                 ++s1;
                 this->score += 10;
+            }
+            if (this->dificulty == 4)
+            {
+                if (score < 60)
+                {
+                    delay = 3;
+                }
+                else if (score >= 60 && score < 150)
+                {
+                    delay = 2;
+                }
+                else if (score >= 150 && score < 300)
+                {
+                    delay = 1;
+                }
+                else
+                {
+                    delay = 0;
+                }
             }
             if (s1.verify_colision() == TRUE)
             {
@@ -82,12 +131,14 @@ void Game::run_game()
                 cout << "\n\n"
                      << "Dificulty: " << dificulties_name[this->dificulty] << "\nDirection: " << directions_name[direction];
                 cout << endl
+                     << "Velocity: " << velocity_names[delay];
+                cout << endl
                      << "Score: " << this->score;
             }
             this->update_game = FALSE;
             is_position_changed = FALSE;
         }
-        stop_watch(velocity[this->dificulty]);
+        stop_watch(velocity[delay]);
     }
     this->print_result();
 }

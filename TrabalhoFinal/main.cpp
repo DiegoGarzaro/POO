@@ -1,12 +1,18 @@
-#include "./Include/Game.h"
+#include "./Include/UserInterface.h"
+//#include "./Include/Game.h"
 
 int main(){
-    Position limit;
-    limit.x = TAM_LIN + TAM_BORDER;
-    limit.y = TAM_COL + TAM_BORDER;
+    UserInterface ui1;
+    int option;
+    // Loop
+    do{
+        option = ui1.call_menu();
+        ui1.handle_menu(option);
+        option = 1;
+        ui1.play_game();
+        ui1.classificar();
+    } while(option == TRUE);
 
-    Game g1(limit, 2);
-    g1.run_game();
 
     return 0;
 }

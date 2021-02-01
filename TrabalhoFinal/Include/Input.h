@@ -9,6 +9,7 @@ enum keys
     KEY_DOWN,
     KEY_RIGHT,
     KEY_LEFT,
+    KEY_ENTER,
     KEY_ESC
 };
 

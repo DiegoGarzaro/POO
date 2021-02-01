@@ -49,17 +49,24 @@ keys Input::Listen()
                     //std::cout << "arrow Down key pressed.\n";
                     this->pressed_key = KEY_DOWN;
                     break;
+                case VK_RETURN: // if escape key was pressed end program loop
+                    //std::cout << "escape key pressed.\n";
+                    this->pressed_key = KEY_ENTER;
+                    //exit(1);
+                    break;
                 case VK_ESCAPE: // if escape key was pressed end program loop
                     //std::cout << "escape key pressed.\n";
                     this->pressed_key = KEY_ESC;
                     //exit(1);
                     break;
-
                 default: // no handled cases where pressed
                     //std::cout << "key not handled pressed.\n";
                     this->pressed_key = KEY_NONE;
                     break;
                 }
+            }
+            else{
+                  this->pressed_key = KEY_NONE;
             }
 
         } // end EventsRead loop

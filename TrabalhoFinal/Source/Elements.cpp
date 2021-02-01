@@ -1,34 +1,5 @@
 #include "../Include/Elements.h"
 
-// Class Limits
-Limits::Limits()
-{
-    this->sizeX = TAM_LIN + TAM_BORDER;
-    this->sizeY = TAM_COL + TAM_BORDER;
-}
-
-Limits::~Limits() {}
-
-void Limits::set_sizeX(int x)
-{
-    this->sizeX = x;
-}
-
-void Limits::set_sizeY(int y)
-{
-    this->sizeY = y;
-}
-
-int Limits::get_sizeX()
-{
-    return this->sizeX;
-}
-
-int Limits::get_sizeY()
-{
-    return this->sizeY;
-}
-
 // Class Board
 Board::Board(int lin, int col)
 {
@@ -154,6 +125,18 @@ Snake::~Snake()
 void Snake::operator++()
 {
     cont++;
+}
+
+void Snake::new_game(){
+    this->size = 2;
+    this->body.clear();
+    Position s1;
+    s1.x = this->limit.x / 2;
+    s1.y = this->limit.y / 2;
+    this->body.push_back(s1);
+    s1.y++;
+    this->body.push_back(s1);
+    this->cont = 0;
 }
 
 void Snake::update_position(int x, int y)

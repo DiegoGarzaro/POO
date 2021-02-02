@@ -1,5 +1,5 @@
 /**
- * Trabalho Final - POO - Equipe 3 - Snake
+ * Trabalho Final - POO (TE353) - Equipe 3 - Snake
  * Author: Diego R. Garzaro
  * GRR20172364
  * */

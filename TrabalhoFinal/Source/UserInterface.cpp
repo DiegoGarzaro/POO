@@ -180,11 +180,12 @@ void UserInterface::classify()
     if (this->g1.get_dificulty() == 4)
     {
         Player p1 = get_player();
+        Person *p = &p1;
         system("cls");
         cout << "\n\n\t\t";
         cout << "Player: " << p1.get_name() << endl
              << "\t\tScore: ";
-        p1.print();
+        p->print();
         Sleep(2000);
         char file_name[15] = "ranking.txt";
         this->load_ranking(p1, file_name);

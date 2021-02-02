@@ -1,28 +1,28 @@
 #include "../Include/Player.h"
 
 Person::Person(){
-    this->nome.clear();
-    this->nome.append("NULL");
+    this->name.clear();
+    this->name.append("NULL");
 }
 
-Person::Person(string nome){
-    this->nome = nome;
+Person::Person(string name){
+    this->name = name;
 }
 
 Person::~Person(){
-    this->nome.clear();
+    this->name.clear();
 }
 
-void Person::set_name(string nome){
-    this->nome = nome;
+void Person::set_name(string name){
+    this->name = name;
 }
 
-string Person::get_nome(){
-    return this->nome;
+string Person::get_name(){
+    return this->name;
 }
 
 void Person::print(){
-    cout << this->nome;
+    cout << this->name;
 }
 
 Player::Player() : Person(){
@@ -30,7 +30,7 @@ Player::Player() : Person(){
     this->rank = 0;
 }
 
-Player::Player(string nome, int score) : Person(nome){
+Player::Player(string name, int score) : Person(name){
     this->score = score;
     this->rank = 0;
 }

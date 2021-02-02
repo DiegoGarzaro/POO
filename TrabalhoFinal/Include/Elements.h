@@ -31,12 +31,12 @@ private:
     char **table; // Board
     Position limit;
 public:
-    Board(int lin, int col);
-    ~Board();
-    void init_board();
-    void set_cursor_position(int x, int y);
-    void update_board(vector<Position> snake, Position feed);
-    void print_board();
+    Board(int lin, int col);            // Constructor
+    ~Board();                           // Destructor
+    void init_board();                  // Clear the attributes 
+    void set_cursor_position(int x, int y); // Set cursor position of the console
+    void update_board(vector<Position> snake, Position feed);   // Update the snake and feed inside the board
+    void print_board();                 // Print the board on the console
 };
 
 // Class Snake -> Cobra
@@ -48,9 +48,9 @@ private:
     int cont;
     Position limit;
 public:
-    Snake(int x, int y);
-    ~Snake();
-    void new_game();
+    Snake(int x, int y);                // Constructor
+    ~Snake();                           // Destructor
+    void new_game();                    // Clear the attributes to start a new game
     void operator++();                  // Increase the size of the body
     void update_position(int x, int y); // Update the segments position
     void move(direction dir);           // Release a movement
@@ -67,9 +67,9 @@ private:
     Position limit;
     int num_feeds;
 public:
-    Feed(int x, int y);
-    ~Feed();
-    void new_feed(vector<Position> snake);
-    int valida_feed(Position nfeed, vector<Position> snake);
-    Position get_feed_position();
+    Feed(int x, int y);                 // Constructor
+    ~Feed();                            // Destructor
+    void new_feed(vector<Position> snake);  // Generate a new position the feed
+    int valida_feed(Position nfeed, vector<Position> snake);    // Verify if the new position generated is valid
+    Position get_feed_position();       // Return the position of the new feed
 };

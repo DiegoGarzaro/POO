@@ -21,32 +21,30 @@ protected:
     int score;
     int dificulty;
     int update_game;
-    int menu;
     clock_t time;
     Position board_size;
 public:
     Game();
+    Game(int sizeX, int sizeY);
     ~Game();
-    int page1();
-    int page2();
-    int call_menu();
     int get_dificulty();
     int get_score();
     void set_dificulty(int d);
-    void handle_menu(int choice);
     void run_game();
     direction key_to_move(keys last_key, keys k);
     void print_result();
-    void stop_watch(int timeout);
+    void stopwatch(int timeout);
 };
 
-
-/**
- * TODO (26/01/2021)
- * 
- * - Add condition to avoid the new feed in the same position that the body of the snake;
- * - Create Menu (if it's possible);
- * - Polimorfismo;
- * - Sobrecarga de operadores;
- * - Funcao virtual.
- * */
+class Limit{
+    private:
+    int size_X;
+    int size_Y;
+    public:
+    Limit();
+    ~Limit();
+    int get_sizeX();
+    int get_sizeY();
+    void set_sizeX(int x);
+    void set_sizeY(int y);
+};

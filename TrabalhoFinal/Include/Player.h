@@ -6,14 +6,14 @@ using namespace std;
 class Person
 {
 private:
-    string nome;
+    string name;
 
 public:
     Person();
-    Person(string nome);
+    Person(string name);
     ~Person();
-    string get_nome();
-    void set_name(string nome);
+    string get_name();
+    void set_name(string name);
     virtual void print();
 };
 
@@ -24,7 +24,7 @@ protected:
     int rank;
 public:
     Player();
-    Player(string nome, int score);
+    Player(string name, int score);
     ~Player();
     int get_score();
     int get_ranking();

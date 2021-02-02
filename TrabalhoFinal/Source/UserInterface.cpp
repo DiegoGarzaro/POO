@@ -2,22 +2,22 @@
 
 UserInterface::UserInterface()
 {
-    this->opcao = 0;
-    Game g1;
+    Game g1(Limit().get_sizeX(), Limit().get_sizeY());
 }
 
-UserInterface::~UserInterface()
-{
-    this->opcao = 0;
-}
+UserInterface::~UserInterface(){}
 
 int UserInterface::call_menu()
 {
     int escolha;
     escolha = page1();
+    cin.clear();
+    //cin.ignore(numeric_limits<streamsize>::max(),'\n'); 
     escolha *= 10;
-    if (escolha != 0)
+    if (escolha > 0)
         escolha += page2();
+        cin.clear();
+        //cin.ignore(numeric_limits<streamsize>::max(),'\n'); 
     return escolha;
 }
 
@@ -80,7 +80,7 @@ int UserInterface::page2()
     int item = 0;
     Input i1;
     keys k = KEY_NONE;
-    keys last_key = KEY_UP;
+    keys last_key = KEY_NONE;
     cout << "\n\n\t\tSNAKE"
          << "\n\n\n\t\t> CHALLENGE <\n\n\t\tEASY\n\n\t\tNORMAL\n\n\t\tHARD\n\n\t\tVERY HARD\n\n\n\n";
     cout << "\tRanking is only available in Challenge Mode!\n\n\n";
@@ -174,7 +174,7 @@ Player UserInterface::get_player()
     return p;
 }
 
-void UserInterface::classificar()
+void UserInterface::classify()
 {
     int is_qualified;
     if (this->g1.get_dificulty() == 4)
@@ -182,7 +182,7 @@ void UserInterface::classificar()
         Player p1 = get_player();
         system("cls");
         cout << "\n\n\t\t";
-        cout << "Player: " << p1.get_nome() << endl
+        cout << "Player: " << p1.get_name() << endl
              << "\t\tScore: ";
         p1.print();
         Sleep(2000);
@@ -236,7 +236,7 @@ void UserInterface::load_ranking(Player p, char *file_name)
             if (category > 2)
             {
                 p_list[cont].set_name(temp_name);
-                p_list[cont].set_score(stringtoint(temp_score));
+                p_list[cont].set_score(string_to_int(temp_score));
                 p_list[cont].set_ranking(temp_rank);
 
                 temp_name.clear();
@@ -254,9 +254,7 @@ void UserInterface::load_ranking(Player p, char *file_name)
         //cout << "\n\n\t\tARQUIVO NAO EXISTE\n\n";
         ofstream outfile;
         outfile.open(file_name);
-        //int i;
-        //for(i = 0; i < 10; i++){
-        outfile << p.get_nome();
+        outfile << p.get_name();
         outfile << ',';
         outfile << p.get_score();
         outfile << ',';
@@ -264,8 +262,7 @@ void UserInterface::load_ranking(Player p, char *file_name)
         //}
         outfile.close();
         cout << "\n\n";
-        cout << p.get_ranking() + 1 << ". " << p.get_nome() << " .......... " << p.get_score() << endl;
-        //p.set_ranking(0);
+        cout << p.get_ranking() + 1 << ". " << p.get_name() << " .......... " << p.get_score() << endl;
     }
     else
     {
@@ -288,11 +285,11 @@ void UserInterface::load_ranking(Player p, char *file_name)
     int i;
     system("cls");
     cout << "\n\n\t\tTOP 10 - PLAYERS RANKING\n\n";
-    for (i = 0; i < 11; i++)
+    for (i = 0; i < 10; i++)
     {
         p_list[i].set_ranking(i);
-        if (p_list[i].get_nome() != "NULL")
-            cout << "\t" << p_list[i].get_ranking() + 1 << ". " << p_list[i].get_nome()[0] << p_list[i].get_nome()[1] << p_list[i].get_nome()[2] << " ............................... " << p_list[i].get_score() << endl;
+        if (p_list[i].get_name() != "NULL")
+            cout << "\t" << p_list[i].get_ranking() + 1 << ". " << p_list[i].get_name()[0] << p_list[i].get_name()[1] << p_list[i].get_name()[2] << " ............................... " << p_list[i].get_score() << endl;
     }
 
     // writing file
@@ -304,7 +301,7 @@ void UserInterface::load_ranking(Player p, char *file_name)
         {
             outfile << ',';
         }
-        outfile << p_list[i].get_nome();
+        outfile << p_list[i].get_name();
         outfile << ',';
         outfile << p_list[i].get_score();
         outfile << ',';
@@ -316,7 +313,7 @@ void UserInterface::load_ranking(Player p, char *file_name)
     system("PAUSE");
 }
 
-int UserInterface::stringtoint(string value)
+int UserInterface::string_to_int(string value)
 {
     int i;
     int result = 0;

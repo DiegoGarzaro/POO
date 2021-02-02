@@ -1,13 +1,25 @@
 #include "../Include/Game.h"
 
-Game::Game() : Board(LIMIT_X, LIMIT_Y),
-               Snake(LIMIT_X, LIMIT_Y), Feed(LIMIT_X, LIMIT_Y)
+Game::Game() : Board(LIMIT_X, LIMIT_X),
+               Snake(LIMIT_X, LIMIT_X), Feed(LIMIT_X, LIMIT_X)
 {
     this->status = 0;
     this->score = 0;
     this->dificulty = 0;
     this->board_size.x = LIMIT_X;
     this->board_size.y = LIMIT_Y;
+    this->update_game = 0;
+    this->time = clock() + velocity[this->dificulty];
+}
+
+Game::Game(int sizeX, int sizeY) : Board(sizeX, sizeY),
+                                   Snake(sizeX, sizeY), Feed(sizeX, sizeY)
+{
+    this->status = 0;
+    this->score = 0;
+    this->dificulty = 0;
+    this->board_size.x = sizeX;
+    this->board_size.y = sizeY;
     this->update_game = 0;
     this->time = clock() + velocity[this->dificulty];
 }
@@ -19,18 +31,20 @@ Game::~Game()
     this->dificulty = 0;
     this->update_game = 0;
     this->time = 0;
-    this->menu = 0;
 }
 
-int Game::get_dificulty(){
+int Game::get_dificulty()
+{
     return this->dificulty;
 }
 
-int Game::get_score(){
+int Game::get_score()
+{
     return this->score;
 }
 
-void Game::set_dificulty(int d){
+void Game::set_dificulty(int d)
+{
     this->dificulty = d;
 }
 
@@ -53,7 +67,8 @@ void Game::run_game()
     {
         delay = 3;
     }
-    else{
+    else
+    {
         delay = this->dificulty;
     }
     while (this->status == 0)
@@ -138,7 +153,7 @@ void Game::run_game()
             this->update_game = FALSE;
             is_position_changed = FALSE;
         }
-        stop_watch(velocity[delay]);
+        stopwatch(velocity[delay]);
     }
     this->print_result();
 }
@@ -199,11 +214,39 @@ void Game::print_result()
     }
 }
 
-void Game::stop_watch(int timeout)
+void Game::stopwatch(int timeout)
 {
     if (clock() >= this->time)
     {
         this->time = clock() + timeout;
         this->update_game = TRUE;
     }
+}
+
+Limit::Limit()
+{
+    this->size_X = TAM_LIN + TAM_BORDER;
+    this->size_Y = TAM_COL + TAM_BORDER;
+}
+
+Limit::~Limit() {}
+
+int Limit::get_sizeX()
+{
+    return this->size_X;
+}
+
+int Limit::get_sizeY()
+{
+    return this->size_Y;
+}
+
+void Limit::set_sizeX(int x)
+{
+    this->size_X = x;
+}
+
+void Limit::set_sizeY(int y)
+{
+    this->size_Y = y;
 }

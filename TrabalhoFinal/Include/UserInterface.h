@@ -3,13 +3,14 @@
 #include <iostream>
 #include <fstream>
 #include "math.h"
+#include <limits>
+#include <ios>
 
 using namespace std;
 
-class UserInterface : private Game, Player
+class UserInterface : private Game, Player, Limit
 {
 private:
-    int opcao;
     Game g1;
 public:
     UserInterface();
@@ -20,7 +21,7 @@ public:
     void handle_menu(int choice);
     void play_game();
     Player get_player();
-    void classificar();
+    void classify();
     void load_ranking(Player p, char *file_name);
-    int stringtoint(string value);
+    int string_to_int(string value);
 };

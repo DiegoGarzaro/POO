@@ -1,1 +1,1 @@
-DiegoR,460,0,teste1,140,1,TesteTeste,120,2,TES,80,3,teste2,60,4,Diego,40,5,teste3,20,6,teste4,10,7,NULL,0,8,NULL,0,9
+DiegoR,460,0,DDD,310,1,DRG,260,2,AAA,210,3,teste1,140,4,TesteTeste,120,5,TES,80,6,teste2,60,7,Diego,40,8,asd,30,9

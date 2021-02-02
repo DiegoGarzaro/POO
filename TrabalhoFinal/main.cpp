@@ -1,5 +1,10 @@
+/**
+ * Trabalho Final - POO - Equipe 3 - Snake
+ * Author: Diego R. Garzaro
+ * GRR20172364
+ * */
+
 #include "./Include/UserInterface.h"
-//#include "./Include/Game.h"
 
 int main(){
     UserInterface ui1;

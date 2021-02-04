@@ -1,0 +1,125 @@
+@startuml
+class Input {
+ -rhnd: HANDLE
+ -Events: DWORD
+ -EventsRead: DWORD
+ -pressed_key: keys
+ +Input()
+ +~Input()
+ +keys Listen()
+}
+
+class Board{
+ -table: char**
+ -limit: Position
+ +Board(int lin, int col)
+ +~Board()
+ +void init_board()
+ +void set_cursor_position(int x, int y)
+ +void update_board(vector<Position> snake, Position feed)
+ +void print_board()
+}
+
+class Snake{
+ -body: vector<Position>
+ -size: int
+ -cont: int
+ -limit: Position
+ +Snake(int x, int y)
+ +~Snake()
+ +void operator++()
+ +void update_position(int x, int y)
+ +void move(direction dir)
+ +int verify_colision()
+ +vector<Position> get_snake()
+ +int get_size()
+}
+
+class Feed{
+ -feed: Position
+ -limit: Position
+ -num_feeds: int
+ +Feed(int x, int y)
+ +~Feed()
+ +void new_feed()
+ +int valida_feed(Position nfeed, vector<Position> snake)
+ +Position get_feed_position()
+}
+
+class Game{
+ #status: char
+ #score: int
+ #dificulty: int
+ #update_game: int
+ #time: clock_t
+ #board_size: Position
+ +Game()
+ +Game(intt sizeX, int sizeY)
+ +~Game()
+ +int get_dificulty()
+ +int get_score()
+ +void set_dificulty(int d)
+ +void run_game()
+ +direction key_to_move(keys last_key, keys k)
+ +void print_result()
+ +void stopwatch(int timeout)
+}
+
+class Limit{
+ -size_X: int
+ -size_Y: int
+ +Limit()
+ +~Limit()
+ +get_sizeX()
+ +get_sizeY()
+ +set_sizeX()
+ +set_sizeY()
+}
+
+class Person{
+ -name: string
+ +Person()
+ +Person(string name)
+ +~Person()
+ +string get_name()
+ +void set_name(string name)
+ +virtual void print()
+}
+
+class Player{
+ #score: int
+ #rank: int
+ +Player()
+ +Player(string name, int score)
+ +~Player()
+ +int get_score()
+ +int get_ranking()
+ +void set_score(int score)
+ +void set_ranking(int rank)
+ +void print()
+}
+
+class UserInterface{
+ -g1: Game
+ +UserInterface()
+ +~UserInterface()
+ +int page1()
+ +int page2()
+ +int call_menu()
+ +void handle_menu(int choice)
+ +void play_game()
+ +Player get_player()
+ +void classificar()
+ +void load_ranking()
+ +int string_to_int(string value)
+}
+
+Input *-- Game
+Board *-- Game
+Snake *-- Game
+Feed *-- Game
+Game o-- UserInterface
+Limit <|-- UserInterface
+Person <|-- Player
+Player <|-- UserInterface
+@enduml
